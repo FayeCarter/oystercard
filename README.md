@@ -99,3 +99,5 @@ journey = Journey.new("Bank", "Bow")
 context 2  - User doesn't touch_in
 
 context 3 - User doesn't touch_out
+
+# Working with Phil

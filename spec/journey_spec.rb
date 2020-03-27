@@ -2,7 +2,8 @@ require 'journey'
 
 describe Journey do
 
-  let(:station) { double :station, zone: 1}
+  let(:station) { double :station, zone: 1 }
+  let(:exit_station) { double :station }
 
   it 'has an entry station' do
     journey = Journey.new
@@ -33,6 +34,12 @@ describe Journey do
     expect(subject.fare).to eq Journey::PENALTY_FARE
   end
 
+  it 'returns fare if journey complete' do
+    subject.start(station)
+    subject.finish(exit_station)
+    expect(subject.fare).to eq Journey::MINIMUM_FARE
+  end
+
   it 'responds to the compelete method' do
     expect(subject).to respond_to :complete?
   end
@@ -47,7 +54,6 @@ describe Journey do
   end
 
   it 'when journey is complete #complete' do
-  # when entry station  
     subject.finish(station)
     expect(subject).to be_complete
   end
@@ -57,7 +63,6 @@ describe Journey do
   end
 
   it '#start sets the entry station on the Journey class' do
-    station = double(:station)
     subject.start(station)
     expect(subject.entry_station).to eq(station)
   end

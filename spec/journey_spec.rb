@@ -55,4 +55,9 @@ describe Journey do
     expect(subject).to respond_to(:start).with(1).argument
   end
 
+  it '#start sets the entry station on the Journey class' do
+    station = double(:station)
+    subject.start(station)
+    expect(subject.entry_station).to eq(station)
+  end
 end

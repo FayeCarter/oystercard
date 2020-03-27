@@ -21,7 +21,8 @@ describe Journey do
   end
 
   it '#finish completes the journey' do
-    expect(subject.finish(station)).to eq subject
+    subject.finish(station)
+    expect(subject).to be_complete
   end
 
   it 'responds to the fare method' do

@@ -51,4 +51,8 @@ describe Journey do
     expect(subject).to be_complete
   end
 
+  it '#start exists on Journey class' do
+    expect(subject).to respond_to(:start).with(1).argument
+  end
+
 end

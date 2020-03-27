@@ -9,6 +9,10 @@ class Journey
     @exit_station
   end
 
+  def start(station)
+
+  end
+
   def finish(station)
     @exit_station = station
     self

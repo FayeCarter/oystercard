@@ -22,6 +22,7 @@ describe Journey do
   end
 
   it '#finish completes the journey' do
+    subject.start(station)
     subject.finish(station)
     expect(subject).to be_complete
   end
@@ -47,17 +48,7 @@ describe Journey do
   it "knows if a journey is not complete" do
     expect(subject).not_to be_complete
   end
-
-  it 'when journey is complete #complete' do
-    subject.finish(station)
-    expect(subject).to be_complete
-  end
-
-  it 'when journey is complete #complete' do
-    subject.finish(station)
-    expect(subject).to be_complete
-  end
-
+  
   it '#start exists on Journey class' do
     expect(subject).to respond_to(:start).with(1).argument
   end

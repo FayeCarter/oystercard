@@ -81,12 +81,15 @@ end
 
   end 
 
+  context 'deals with fare' do
+    
+    it 'penalty fare deducted when journey is not complete' do
+      card.top_up(10)
+      card.touch_in('edgeware')
+      expect{card.touch_in("waterloo")}.to change{ card.balance }.by (-6)
+    end
+    
+  end
 
-
-    #expect { subject.deduct(1) }.to change{ subject.balance }.by (-1)
-      # what about if it goes under 0
-  
 end
 
-#Write a test that checks that an error is thrown if 
-#a card with insufficient balance is touched in

@@ -1,7 +1,9 @@
 require_relative 'journey.rb'
 
 class Oystercard
-  attr_reader :balance, :entry_station, :journeys, :journey
+  
+  attr_reader :balance, :entry_station, :journeys
+
   CARD_LIMIT = 90
   MINIMUM_FUNDS = 1
   AMOUNT = 1

@@ -5,56 +5,69 @@ describe Journey do
   let(:station) { double :station, zone: 1 }
   let(:exit_station) { double :station }
 
-  it 'has an entry station' do
+  it 'entry station can be set' do
     journey = Journey.new
     journey.entry_station = station
     expect(journey.entry_station).to eq station
   end
 
-  it 'has an exit station' do
+  it 'exit station can be set' do
     journey = Journey.new
     journey.exit_station = station
     expect(journey.exit_station).to eq station
   end
 
-  it 'responds to the finish method' do
-    expect(subject).to respond_to :finish
+  describe '#start' do
+    it 'exists on Journey class' do
+      expect(subject).to respond_to(:start).with(1).argument
+    end
+
+    it 'sets the entry station on the Journey class' do
+      subject.start(station)
+      expect(subject.entry_station).to eq(station)
+    end
   end
 
-  it '#finish completes the journey' do
-    subject.start(station)
-    subject.finish(station)
-    expect(subject).to be_complete
+  describe '#finish' do
+    it 'subject responds to the finish method' do
+      expect(subject).to respond_to :finish
+    end
+
+    it 'sets the exit station on the Journey class' do
+      subject.start(station)
+      expect(subject.finish(station)).to eq(station)
+    end
   end
 
-  it 'responds to the fare method' do
-    expect(subject).to respond_to :fare
+  describe '#complete' do
+    it 'subject responds to the compelete method' do
+      expect(subject).to respond_to :complete?
+    end
+
+    it "is false by default" do
+      expect(subject).not_to be_complete
+    end
+
+    it 'confirms a complete journey' do
+      subject.start(station)
+      subject.finish(station)
+      expect(subject).to be_complete
+    end
   end
 
-  it 'has a penalty fare by default' do
-    expect(subject.fare).to eq Journey::PENALTY_FARE
-  end
+  describe '#fare' do
+    it 'subject responds to the fare method' do
+      expect(subject).to respond_to :fare
+    end
 
-  it 'returns fare if journey complete' do
-    subject.start(station)
-    subject.finish(exit_station)
-    expect(subject.fare).to eq Journey::MINIMUM_FARE
-  end
+    it 'journey has penalty for an incomplete journey' do
+      expect(subject.fare).to eq Journey::PENALTY_FARE
+    end
 
-  it 'responds to the compelete method' do
-    expect(subject).to respond_to :complete?
-  end
-
-  it "knows if a journey is not complete" do
-    expect(subject).not_to be_complete
-  end
-  
-  it '#start exists on Journey class' do
-    expect(subject).to respond_to(:start).with(1).argument
-  end
-
-  it '#start sets the entry station on the Journey class' do
-    subject.start(station)
-    expect(subject.entry_station).to eq(station)
+    it 'returns minimum fare if the journey is complete' do
+      subject.start(station)
+      subject.finish(exit_station)
+      expect(subject.fare).to eq Journey::MINIMUM_FARE
+    end
   end
 end

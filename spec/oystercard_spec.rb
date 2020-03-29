@@ -59,7 +59,7 @@ end
 
   context '#touch_out' do 
 
-    let(:journey) { double :journey, complete?: true }
+    let(:journey) { double :journey, complete?: true, entry_station: nil }
 
     it 'ends journey' do
       expect(card).to respond_to(:touch_out)
@@ -76,7 +76,7 @@ end
       card.top_up(10)
       card.touch_in('edgeware')
       card.touch_out("waterloo")
-      expect(card.entry_station).to eq nil
+      expect(journey.entry_station).to eq nil
     end 
 
   end 

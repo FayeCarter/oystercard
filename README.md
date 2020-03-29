@@ -1,4 +1,4 @@
-# Oyster card  :bus: :train: 
+# Oystercard
 
 ## User Stories: 
     In order to use public transport
@@ -50,54 +50,3 @@
     I need to have the correct fare calculated
 
 
-## Class
-
-
-| Card           | additional info          |
-| -------------- | ------------------------ |
-| @journey       | default =false           |
-| @balance       | default (0)              |
-| CARD_LIMIT     | 90                       |
-| MINIMUM_FUNDS  | 1?                       |
-| -------------- | ------------------------ |
-| top_up(amount) | amount = number          |
-| touch_up       | connects to #travelling? |
-| touch_out      | connects to #travelling? |
-| travelling?    |                          |
-|                |                          |
-
-# Step 13
-
-Objects | Messages
------------|----------
-Oystercard | attr_reader :balance, :entry_station, :journeys <br/> initialize(balance = 0) <br/> top_up(amount) <br/> touch_in(station) <br/> touch_out(station) <br/> in_journey? <br/> *deduct(amount)* <br/> *save_start_journey(station)*
-Station    | initialize(name, zone) <br/> attr_reader :zone :name
-
-
-# Step 14
-
-card = Card.new
->> card
-card.top_up(5)
->> 5
-card.touch_out("bank")
->> (undefined method `[]=' for nil:NilClass)
-Journey doesn't exists yet
->> "bank"
-Store the hash of the exit station in the journeys array
-It should charge a penalty fee
-
-Objects | Messages
------------|----------
-Oystercard | attr_reader :balance, :journeys <br/> initialize(balance = 0) <br/> top_up(amount) <br/> touch_in(station) <br/> touch_out(station) <br/>  !! in_journey?  !! <br/> *deduct(amount)* <br/> *penalty*
-Station    | initialize(name, zone) <br/> attr_reader :zone :name
-Journey     | attr_reader :entry_station, :exit_station <br/> finish <br/> fare <br/> complete?
-
-context 1 - User works correctly
-journey = Journey.new("Bank", "Bow")
-
-context 2  - User doesn't touch_in
-
-context 3 - User doesn't touch_out
-
-# Working with Phil
